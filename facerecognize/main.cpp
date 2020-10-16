@@ -1,9 +1,13 @@
 #include <iostream>
+#include <opencv.hpp>		
+//#include <opencv2/opencv.hpp>
+using namespace cv;
 
-using namespace std;
+int main()
+{
+	Mat img = imread("C:\\Users\\34630\\Desktop\\seetaface6\\facerecognize\\image\\ym2.jpg");
+	imshow("ԭͼ", img);
 
-int main() {
-	cout << "hello world"<<endl;
-	cout << "1234" << endl;
+	waitKey(0);
 	return 0;
 }
