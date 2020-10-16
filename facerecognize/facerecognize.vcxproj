@@ -111,7 +111,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\34630\Desktop\seetaface6\sf6.0_windows\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world430d.lib;opencv_world430.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world430d.lib;opencv_world430.lib;SeetaFaceDetector600d.lib;SeetaAgePredictor600.lib;SeetaAgePredictor600d.lib;SeetaFaceAntiSpoofingX600d.lib;SeetaEyeStateDetector200.lib;SeetaEyeStateDetector200d.lib;SeetaFaceAntiSpoofingX600.lib;SeetaFaceLandmarker600.lib;SeetaFaceLandmarker600d.lib;SeetaFaceRecognizer610.lib;SeetaFaceRecognizer610d.lib;SeetaFaceTracking600.lib;SeetaFaceTracking600d.lib;SeetaGenderPredictor600.lib;SeetaGenderPredictor600d.lib;SeetaMaskDetector200.lib;SeetaMaskDetector200d.lib;SeetaPoseEstimation600.lib;SeetaPoseEstimation600d.lib;SeetaQualityAssessor300.lib;SeetaQualityAssessor300d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
