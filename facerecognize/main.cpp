@@ -107,7 +107,7 @@ int predict(seeta::FaceAntiSpoofing *fas, const SeetaImageData &image, const See
 		point[i] = points.at(i);
 
 	}
-	auto status = fas->Predict(image, face, point);
+	auto status = fas->PredictVideo(image, face, point);
 	return status;
 }
 
@@ -157,7 +157,7 @@ int main(){
 	model2.append(fassecond_path);//全局活体+局部活体
 	seeta::FaceAntiSpoofing FS(model2);  
 
-	Mat frame1 = imread("C:\\Users\\34630\\Desktop\\seetaface6\\facerecognize\\image\\me3.jpg");//2,3,5可行
+	Mat frame1 = imread("C:\\Users\\34630\\Desktop\\seetaface6\\facerecognize\\image\\ym1.jpg");//2,3,5可行
 
 	Mat canvas1;
 	canvas1 = frame1.clone();
@@ -172,52 +172,52 @@ int main(){
 
 	vector<SeetaPointF> points1 = mark(&FL, simg1, rect1, canvas1);//将得到的五点数组传给特征，以用来后面的比对
 
-	std::shared_ptr<float> features1 = extract(&FR, simg1, points1);//提取特征点
+	//std::shared_ptr<float> features1 = extract(&FR, simg1, points1);//提取特征点
 
 
-	//对另一幅图片做同样操作
-	//Mat frame2 = imread("C:\\Users\\34630\\Desktop\\seetaface6\\facerecognize\\image\\ym2.jpg");
-	//Mat canvas2;
-	//canvas2 = frame2.clone();
-	//SeetaImageData simg2 = imgTranslate(frame2);
-	//SeetaFaceInfoArray face2 = FD.detect(simg2);
-	//sort(face2);
-	//SeetaRect rect2 = FaceRect(face2, canvas2);
-	//vector<SeetaPointF> points2 = mark(&FL, simg2, rect2, canvas2);
+//	对另一幅图片做同样操作
+	Mat frame2 = imread("C:\\Users\\34630\\Desktop\\seetaface6\\facerecognize\\image\\ym2.jpg");
+	Mat canvas2;
+	canvas2 = frame2.clone();
+	SeetaImageData simg2 = imgTranslate(frame2);
+	SeetaFaceInfoArray face2 = FD.detect(simg2);
+	sort(face2);
+	SeetaRect rect2 = FaceRect(face2, canvas2);
+	vector<SeetaPointF> points2 = mark(&FL, simg2, rect2, canvas2);
 	//std::shared_ptr<float> features2 = extract(&FR, simg2, points2);
 
 
-	//float similarity = compare(&FR,features1, features2);
+	float similarity = compare(&FR,extract(&FR, simg1, points1), extract(&FR, simg2, points2));
 
-	//std::cout << "the similarity1 is:  " << similarity <<endl;
+	std::cout << "the similarity1 is:  " << similarity <<endl;
 
-	VideoCapture videocapture(0);
-	Mat mat;
-	while (videocapture.isOpened())
-	{
-		videocapture.read(mat);
-		flip(mat, mat, 1);
-		SeetaImageData simg0 = imgTranslate(mat);
+	//VideoCapture videocapture(0);
+	//Mat mat;
+	//while (videocapture.isOpened())
+	//{
+	//	videocapture.read(mat);
+	//	flip(mat, mat, 1);
+	//	SeetaImageData simg0 = imgTranslate(mat);
 
-		SeetaFaceInfoArray face0 = FD.detect(simg0);
-		sort(face1);
+	//	SeetaFaceInfoArray face0 = FD.detect(simg0);
+	//	sort(face1);
 
-		SeetaRect rect0 = FaceRect(face0, mat);
+	//	SeetaRect rect0 = FaceRect(face0, mat);
 
-		vector<SeetaPointF> points0 = mark(&FL, simg0, rect0, mat);//将得到的五点数组传给特征，以用来后面的比对
+	//	vector<SeetaPointF> points0 = mark(&FL, simg0, rect0, mat);//将得到的五点数组传给特征，以用来后面的比对
 
-		std::shared_ptr<float> features0 = extract(&FR, simg0, points0);//提取特征点
+	//	std::shared_ptr<float> features0 = extract(&FR, simg0, points0);//提取特征点
 
-		//std::cout << compare(&FR,features0,features1) << std::endl;
+	//	//std::cout << compare(&FR,features0,features1) << std::endl;
 
-		set_frame(100, &FS);
-		int status = predict(&FS, simg0, rect0, points0);//获取活体检测状态
-		cout << status << endl;
+	//	//set_frame(2, &FS);
+	//	//int status = predict(&FS, simg0, rect0, points0);//获取活体检测状态
+	//	//cout << status << endl;
 
-		imshow("1", mat);
-		waitKey(1);
+	//	imshow("1", mat);
+	//	waitKey(1);
 
-	}
+	//}
 
 	//namedWindow("detected_image");
 	//imshow("detected_image", canvas2);
